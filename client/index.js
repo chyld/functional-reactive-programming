@@ -73,3 +73,9 @@ Array.prototype.concatAll = function(){
 };
 
 // -------------------------------------------------------------------------- //
+
+Array.prototype.concatMap = function(fn){
+  return this.map(fn).concatAll();
+};
+
+// -------------------------------------------------------------------------- //
