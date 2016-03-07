@@ -79,3 +79,14 @@ Array.prototype.concatMap = function(fn){
 };
 
 // -------------------------------------------------------------------------- //
+
+Array.prototype.zip = function(other, fn){
+  let results = [];
+
+  for(var i = 0; i < Math.min(this.length, other.length); i++)
+    results.push(fn(this[i], other[i]));
+
+  return results;
+};
+
+// -------------------------------------------------------------------------- //
