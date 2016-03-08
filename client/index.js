@@ -90,3 +90,23 @@ Array.prototype.zip = function(other, fn){
 };
 
 // -------------------------------------------------------------------------- //
+
+var lists, videos, bookmarks, boxarts;
+
+return lists.map(l => {
+  return {
+    name: l.name,
+    videos: videos.filter(v => v.listId === l.id).concatMap(v => {
+      var bm = bookmarks.filter(b => b.videoId === v.id).map(b => b.time);
+      var bx = boxarts.filter(x => x.videoId === v.id).reduce((acc, cur) => cur.width * cur.height < acc.width * acc.height ? cur : acc).map(x => x.url);
+      return Array.zip(bm, bx, function(m, x){
+        return {
+          id: v.id,
+          title: v.title,
+          time: m,
+          boxart: x
+        };
+      });
+    })
+  };
+});
